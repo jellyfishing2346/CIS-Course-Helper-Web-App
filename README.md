@@ -81,3 +81,5 @@ Timeline
     Weeks 9-10: Integration of frontend and backend
     Weeks 11-12: Testing and bug fixing
     Week 13: Final design implementations and preparing the presentation
+
+Copyright Faizan Khan
