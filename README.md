@@ -43,12 +43,12 @@ cd cis-course-helper-web-app
 
 Install backend dependencies:
 
-cd backend
+cd server
 npm install
 
 Install frontend dependencies:
 
-cd frontend
+cd client
 npm install
 
 Set up MongoDB. If using a local instance, ensure MongoDB is running:
@@ -57,12 +57,12 @@ mongod
 
 Run the backend server:
 
-cd backend
+cd server
 npm start
 
 Run the frontend development server:
 
-    cd frontend
+    cd client
     npm start
 
     The web app will be accessible at http://localhost:3000.
@@ -82,4 +82,4 @@ Timeline
     Weeks 11-12: Testing and bug fixing
     Week 13: Final design implementations and preparing the presentation
 
-Copyright Faizan Khan
+Copyright 2025 @ Faizan Khan
