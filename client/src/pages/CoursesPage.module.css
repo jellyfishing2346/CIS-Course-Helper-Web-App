@@ -1,0 +1,207 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.selectContainer {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.selectContainer label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: 10px;
+  color: var(--text-color);
+}
+
+.select {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.select:hover {
+  border-color: var(--primary-color);
+}
+
+.searchInput {
+  width: 90%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.courseList {
+  list-style: none;
+  padding: 0;
+}
+
+.courseGroup {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.optionsContainer {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+.optionItem {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--option-bg);
+  border-radius: 6px;
+}
+
+.courseName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.courseInfo {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.courseInfo strong {
+  color: var(--text-color);
+  margin-right: 8px;
+}
+
+.courseInfo svg {
+  margin-right: 8px;
+  color: var(--primary-color);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageButton {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pageButton:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.pageButton.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid var(--primary-color);
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  border-left: 4px solid var(--error-color);
+  margin-bottom: 2rem;
+}
+
+.error {
+  color: var(--error-color);
+  font-weight: 500;
+}
+
+.noResults {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .selectContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .select {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,56 @@
+/* CheckPrerequisites.module.css */
+
+/* Color Palette */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+select, button {
+  padding: 8px 12px;
+  margin-top: 5px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #cccccc;
+}
+
+.message {
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 4px;
+}
+
+.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.error {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+.results {
+  margin-top: 20px;
+}
+
+.met {
+  color: green;
+}
+
+.unmet {
+  color: red;
+}
