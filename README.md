@@ -28,6 +28,9 @@ A web application designed to help Brooklyn College CIS students navigate their 
 ◻️ Professor ratings and reviews  
 ◻️ Schedule conflict detection  
 
+## Trello
+[Trello](https://trello.com/invite/b/67bc31783ada4f88b380032e/ATTI5a76982f9bf7ba8fdf84fb60ebd285703FB14B76/cis-course-helper-web-app)
+
 ## Tech Stack
 
 ### Frontend
