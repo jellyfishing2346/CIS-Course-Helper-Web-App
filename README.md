@@ -1,6 +1,6 @@
 # CIS Course Helper Web App
 
-![Project Banner](https://via.placeholder.com/800x200?text=CIS+Course+Helper) <!-- Replace with actual image -->
+![Project Banner](https://github.com/user-attachments/assets/2ee2681c-e5e2-4842-ae82-89c179c34117) <!-- Replace with actual image -->
 
 A web application designed to help Brooklyn College CIS students navigate their degree requirements and course planning.
 
