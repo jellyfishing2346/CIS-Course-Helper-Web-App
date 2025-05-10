@@ -12,6 +12,9 @@ A web application designed to help Brooklyn College CIS students navigate their 
 - [Contributing](#contributing)
 - [License](#license)
 
+## Video
+[Link](https://www.loom.com/share/786248a679224b71bb22556001f421f5?sid=c8229fc9-a2f3-4ff9-89ae-a623a2d9ac9d)
+
 ## Features
 
 ### Core Functionality
