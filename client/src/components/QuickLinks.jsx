@@ -15,7 +15,7 @@ const QuickLinks = () => {
 
          <h3 className="text-blue-600 font-medium mb-2">✅ Prerequisite Checker</h3>
           <a 
-            href="/prerequisites" 
+            href="/check-prerequisites" 
             className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow 
                        w-full sm:w-1/3 text-center border border-blue-100 hover:border-blue-200"
           >

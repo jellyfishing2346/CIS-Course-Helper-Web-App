@@ -1,56 +1,430 @@
-/* CheckPrerequisites.module.css */
+/* src/components/CheckPrerequisites.module.css */
+/* Updated styles for your CheckPrerequisites component */
 
-/* Color Palette */
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+:root {
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #adb5bd;
+  --border-color: #dee2e6;
+  --text-color: #343a40;
+  --heading-color: #212529;
+
+  --success-bg: #d4edda;
+  --success-border: #c3e6cb;
+  --success-text: #155724;
+
+  --fail-bg: #f8d7da;
+  --fail-border: #f5c6cb;
+  --fail-text: #721c24;
+
+  --warning-bg: #fff3cd;
+  --warning-border: #ffeeba;
+  --warning-text: #856404;
+
+  --primary-blue: #007bff;
+  --primary-green: #28a745;
+  --primary-red: #dc3545;
+
+  --hover-blue: #0056b3;
+  --hover-green: #218838;
+  --active-blue: #004a99;
 }
 
-.form-group {
-  margin-bottom: 15px;
+/* General container for the component */
+.check-prerequisites {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 30px; /* Increased padding */
+  max-width: 800px; /* Slightly reduced max-width for a tighter feel */
+  margin: 30px auto; /* Center and add more vertical space */
+  border: 1px solid var(--border-color);
+  border-radius: 10px; /* Slightly more rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  background-color: #fff;
+  color: var(--text-color);
 }
 
-select, button {
-  padding: 8px 12px;
-  margin-top: 5px;
+/* Headings */
+h2, h3 {
+  color: var(--heading-color);
+  margin-bottom: 20px; /* More space below headings */
+  font-weight: 600;
+  text-align: center; /* Center main headings */
 }
 
-button {
-  background-color: #4CAF50;
+h3 {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--medium-gray); /* Subtle underline */
+  padding-bottom: 10px;
+  margin-top: 25px;
+  text-align: left; /* Align sub-headings left */
+}
+
+/* Section and selection box styling */
+.selection-group, .section {
+  margin-bottom: 30px; /* Increased space between sections */
+  padding: 20px; /* Increased padding */
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Inner shadow for depth */
+}
+
+.selection-group label {
+  display: block;
+  margin-bottom: 10px; /* More space below labels */
+  font-weight: bold;
+  color: var(--heading-color);
+  font-size: 1.1em;
+}
+
+/* Input fields and selects */
+.selection-group select,
+.add-course-form input.course-input,
+.add-course-form select.grade-select {
+  width: 100%;
+  padding: 12px; /* Increased padding */
+  margin-bottom: 15px; /* More space below inputs */
+  border: 1px solid var(--dark-gray);
+  border-radius: 6px; /* Slightly more rounded */
+  box-sizing: border-box;
+  font-size: 1em;
+  color: var(--text-color);
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.selection-group select:focus,
+.add-course-form input.course-input:focus,
+.add-course-form select.grade-select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Clear focus outline */
+  outline: none;
+}
+
+/* Placeholder text styling */
+.selection-group select::placeholder,
+.add-course-form input.course-input::placeholder {
+  color: var(--dark-gray);
+  opacity: 1; /* For Firefox compatibility */
+}
+
+
+/* Add course form layout */
+.add-course-form {
+  display: flex;
+  gap: 15px; /* Increased gap */
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 15px; /* Space between form and list */
+}
+
+.add-course-form .course-input {
+  flex: 2;
+  min-width: 180px; /* Slightly larger min-width */
+}
+
+.add-course-form .grade-select {
+  flex: 1;
+  min-width: 120px; /* Slightly larger min-width */
+}
+
+.add-course-form .add-button {
+  flex: 1;
+  min-width: 130px; /* Slightly larger min-width */
+  padding: 12px 20px; /* Increased padding */
+  background-color: var(--primary-blue);
   color: white;
   border: none;
+  border-radius: 6px; /* Consistent rounding */
+  font-size: 1em;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  outline: none;
+  font-weight: 500;
 }
 
-button:disabled {
-  background-color: #cccccc;
+.add-course-form .add-button:hover:not(:disabled) {
+  background-color: var(--hover-blue);
+  transform: translateY(-1px); /* Subtle hover effect */
 }
 
-.message {
+.add-course-form .add-button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
+.add-course-form .add-button:disabled {
+  background-color: var(--dark-gray);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7; /* Visual feedback for disabled */
+}
+
+/* Course list display */
+.course-list ul {
+  list-style: none; /* Remove default bullet points */
+  padding-left: 0;
+  margin-top: 15px;
+  max-height: 250px; /* Set max-height for scrollability */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid var(--medium-gray);
+  border-radius: 6px;
+  background-color: #fff;
   padding: 10px;
-  margin: 15px 0;
+}
+
+.course-list li {
+  margin-bottom: 8px; /* More space between items */
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--medium-gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-gray);
   border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-.success {
-  background-color: #dff0d8;
-  color: #3c763d;
+.course-list li:hover {
+  background-color: #e0e0e0;
 }
 
-.error {
-  background-color: #f2dede;
-  color: #a94442;
+.course-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
-.results {
-  margin-top: 20px;
+/* Remove button for course history */
+.course-list .remove-button {
+  background-color: var(--primary-red);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  outline: none;
 }
 
-.met {
-  color: green;
+.course-list .remove-button:hover {
+  background-color: #c82333;
 }
 
-.unmet {
-  color: red;
+/* Check prerequisites input form */
+.check-specific-form {
+  display: flex;
+  gap: 15px; /* Increased gap */
+  align-items: center;
+  margin-top: 25px;
+}
+
+.check-specific-form .course-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--dark-gray);
+  border-radius: 6px;
+  font-size: 1em;
+  color: var(--text-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.check-specific-form .course-input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+
+.check-specific-form .check-button {
+  padding: 12px 20px;
+  background-color: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  outline: none;
+  font-weight: 500;
+}
+
+.check-specific-form .check-button:hover:not(:disabled) {
+  background-color: var(--hover-green);
+  transform: translateY(-1px);
+}
+
+.check-specific-form .check-button:disabled {
+  background-color: #94d3a2;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.check-specific-form .check-button:focus {
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.4);
+}
+
+/* Prerequisite check result display */
+.results-display {
+  margin-top: 30px; /* More space above results */
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 1em;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.results-display.success {
+  border: 1px solid var(--success-border);
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+.results-display.fail {
+  border: 1px solid var(--fail-border);
+  background-color: var(--fail-bg);
+  color: var(--fail-text);
+}
+
+.results-display h3 { /* Use h3 for result titles */
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: inherit; /* Inherit color from parent success/fail style */
+  border-bottom: none; /* Remove underline for result title */
+  padding-bottom: 0;
+}
+
+.results-display ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.results-display li {
+  margin-bottom: 8px; /* More space between list items */
+  padding-left: 1.5em; /* Space for custom bullet */
+  position: relative;
+  line-height: 1.4;
+}
+
+.results-display li::before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 1.2em;
+}
+
+.detail-success::before {
+  content: '✅'; /* Checkmark emoji */
+  color: var(--success-text);
+}
+
+.detail-fail::before {
+  content: '❌'; /* X emoji */
+  color: var(--fail-text);
+}
+
+.detail-success {
+  color: var(--success-text);
+}
+
+.detail-fail {
+  color: var(--fail-text);
+}
+
+/* Caveat message styling */
+.caveat {
+  background-color: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  padding: 18px; /* Increased padding */
+  border-radius: 8px;
+  margin-top: 25px;
+  color: var(--warning-text);
+  font-size: 0.95em;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Feedback for invalid input or messages */
+.feedback-message {
+  color: var(--primary-red); /* Consistent red for errors */
+  margin-top: 12px;
+  font-size: 0.95em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 768px) { /* Adjusted breakpoint */
+  .check-prerequisites {
+    padding: 15px;
+    margin: 15px auto;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  .selection-group, .section {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .check-specific-form,
+  .add-course-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .check-specific-form .check-button,
+  .add-course-form .add-button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .selection-group select,
+  .add-course-form input.course-input,
+  .add-course-form select.grade-select {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .course-list ul {
+    padding: 5px;
+  }
+  
+  .course-list li {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) { /* Smaller mobile screens */
+  .check-prerequisites {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  .selection-group label {
+    font-size: 1em;
+  }
+
+  .add-course-form .add-button,
+  .check-specific-form .check-button {
+    font-size: 0.9em;
+    padding: 10px 15px;
+  }
 }

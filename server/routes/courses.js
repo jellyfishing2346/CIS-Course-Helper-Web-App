@@ -3,7 +3,7 @@ import { majors, minors } from '../data/courses.js';
 
 const router = express.Router();
 
-// Existing endpoint for single major/minor query
+// GET a single major or minor
 router.get('/', (req, res) => {
   try {
     const { major, minor } = req.query;
@@ -22,13 +22,40 @@ router.get('/', (req, res) => {
   }
 });
 
-// NEW endpoints for all majors/minors
+// GET all majors and minors
 router.get('/majors', (req, res) => {
   res.json(majors);
 });
 
 router.get('/minors', (req, res) => {
   res.json(minors);
+});
+
+// ✅ POST route to add a course (for development/testing)
+router.post('/', (req, res) => {
+  try {
+    const { type, name, course } = req.body; // type = 'major' or 'minor'
+    if (!type || !name || !course) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    if (type === 'major') {
+      if (!majors[name]) majors[name] = [];
+      majors[name].push(course);
+      return res.status(201).json({ message: 'Course added to major' });
+    }
+
+    if (type === 'minor') {
+      if (!minors[name]) minors[name] = [];
+      minors[name].push(course);
+      return res.status(201).json({ message: 'Course added to minor' });
+    }
+
+    res.status(400).json({ error: 'Invalid type' });
+  } catch (error) {
+    console.error('Error adding course:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 export default router;

@@ -1,61 +1,83 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // <--- IMPORTANT: Use axios
 import { FaBook, FaCheckCircle, FaInfoCircle } from 'react-icons/fa';
 import styles from './CoursesPage.module.css';
+
+// Define your API base URL, consistent with your backend
+const API_BASE_URL = 'http://localhost:3000'; // <--- IMPORTANT: Set this to your backend URL
 
 const CoursesPage = () => {
   const [courses, setCourses] = useState([]);
   const [error, setError] = useState(null);
   const [selectedArea, setSelectedArea] = useState('majors');
-  const [major, setMajor] = useState('computer_science');
-  const [minor, setMinor] = useState('data_science');
+  const [major, setMajor] = useState('computer_science'); // Default major for initial load
+  const [minor, setMinor] = useState('data_science');     // Default minor for initial load
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const coursesPerPage = 3;
+  // Determine the current selection to pass to the API
   const currentSelection = selectedArea === 'majors' ? major : minor;
 
   useEffect(() => {
-    let isMounted = true;
     const fetchCourses = async () => {
       setLoading(true);
       setError(null);
       
+      let url = '';
+      if (selectedArea === 'majors' && currentSelection) {
+        url = `${API_BASE_URL}/api/?major=${currentSelection}`; // <--- Use API_BASE_URL
+      } else if (selectedArea === 'minors' && currentSelection) {
+        url = `${API_BASE_URL}/api/?minor=${currentSelection}`; // <--- Use API_BASE_URL
+      }
+
+      if (!url) {
+        setLoading(false);
+        setCourses([]); // Clear courses if no selection
+        return;
+      }
+
+      console.log('Fetching:', url);
+      
       try {
-        const response = await fetch(`/api/?${selectedArea.slice(0, -1)}=${currentSelection}`);
-        console.log('Fetching:', response.url);
-        
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        
-        const data = await response.json();
-        console.log('Received data:', data);
+        // <--- IMPORTANT: Use axios.get instead of fetch API
+        const response = await axios.get(url); 
+        console.log('Received data:', response.data);
         
         // Modified data format check
-        if (isMounted) {
-          if (Array.isArray(data)) {
-            setCourses(data);
-          } else if (data.courses && Array.isArray(data.courses)) {
-            setCourses(data.courses);
-          } else {
-            throw new Error("Unexpected data format from API");
-          }
+        // Your backend might return data directly as an array, or nested under a 'courses' key
+        if (Array.isArray(response.data)) {
+          setCourses(response.data);
+        } else if (response.data.courses && Array.isArray(response.data.courses)) {
+          setCourses(response.data.courses);
+        } else {
+          // If the API returns something unexpected, you might need to adjust here
+          // or check your backend's response format.
+          throw new Error("Unexpected data format from API");
         }
       } catch (err) {
-        if (isMounted) {
-          console.error("Fetch error:", err);
-          setError(err.message || "Error loading courses. Please try again.");
-        }
+        console.error("Fetch error:", err);
+        setError(err.response?.data?.message || err.message || "Error loading courses. Please try again.");
       } finally {
-        if (isMounted) setLoading(false);
+        setLoading(false);
       }
     };
   
     fetchCourses();
-    return () => { isMounted = false; };
-  }, [selectedArea, major, minor]);
+  }, [selectedArea, major, minor]); // Dependency array ensures fetch on change
 
-  const handleMajorChange = (e) => setMajor(e.target.value);
-  const handleMinorChange = (e) => setMinor(e.target.value);
+  const handleMajorChange = (e) => {
+    setMajor(e.target.value);
+    setMinor(''); // Clear minor selection when major changes
+    setCurrentPage(1); // Reset pagination
+  };
+  
+  const handleMinorChange = (e) => {
+    setMinor(e.target.value);
+    setMajor(''); // Clear major selection when minor changes
+    setCurrentPage(1); // Reset pagination
+  };
 
   const filteredCourses = courses.filter((course) => {
     const matchesName = course.name?.toLowerCase().includes(searchQuery.toLowerCase()) || false;
@@ -89,6 +111,9 @@ const CoursesPage = () => {
             onChange={(e) => {
               setSelectedArea(e.target.value);
               setCurrentPage(1);
+              // Reset major/minor selection when area changes if needed
+              // setSelectedMajor(e.target.value === 'majors' ? 'computer_science' : '');
+              // setSelectedMinor(e.target.value === 'minors' ? 'data_science' : '');
             }} 
             className={styles.select}
           >
@@ -144,6 +169,7 @@ const CoursesPage = () => {
       ) : error ? (
         <div className={styles.errorContainer}>
           <p className={styles.error}>Error: {error}</p>
+          {/* You might want to fetch these dynamic lists from the backend too */}
           {selectedArea === 'minors' && (
             <p>Available minors: Computer Science, Data Science, Multimedia Computing, Cognitive Science</p>
           )}
@@ -167,15 +193,20 @@ const CoursesPage = () => {
                       <p className={styles.courseInfo}>
                         <FaCheckCircle /> <strong>Requirements:</strong> {
                           Array.isArray(courseGroup.requirements) 
-                            ? courseGroup.requirements[index] || courseGroup.requirements.join(', ')
-                            : courseGroup.requirements
+                            ? courseGroup.requirements.join(', ') // Use join() always if it's an array of requirements for the group
+                            : courseGroup.requirements // Fallback if it's a single string
                         }
                       </p>
                       <p className={styles.courseInfo}>
                         <FaInfoCircle /> <strong>Prerequisites:</strong> {
+                          // This part likely needs to reference your allCoursePrerequisites map
+                          // and would be more complex to display here dynamically.
+                          // For now, we'll just show placeholder or the raw data if available.
+                          // (Assuming 'prerequisites' field might be populated by backend or just be a note)
                           Array.isArray(courseGroup.prerequisites)
-                            ? courseGroup.prerequisites[index] || courseGroup.prerequisites.join(', ')
-                            : courseGroup.prerequisites
+                            ? courseGroup.prerequisites.join(', ')
+                            : courseGroup.prerequisites // Display raw if not array
+                            || 'See Check Prerequisites page for details' // Default message
                         }
                       </p>
                     </div>
