@@ -1,8 +1,8 @@
 [build]
-  command = "cd client && pnpm install && pnpm run build"
-  publish = "client/dist"
   base = "client"
+  command = "pnpm install && pnpm run build"
+  publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18"  # Match your local Node version
-  PNPM_VERSION = "8"   # Match your pnpm version
+  NODE_VERSION = "18"
+  PNPM_VERSION = "8"
